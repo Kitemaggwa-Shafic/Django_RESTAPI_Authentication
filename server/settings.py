@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend", "dist"),  # Adjust the path to your React app build directory
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,6 +31,22 @@ SECRET_KEY = "django-insecure-l7^@v4(k5yrx9nrx3x45e-@gec3drr5zq4iph-%)1q-ifu(w4b
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+# Allowed cors headers and credentials
+CORS_ALLOWED_HEADERS =[
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+]
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_WHITELIST = (
+'http://localhost:3000',
+'http://localhost:8000',
+'http://localhost:5173',
+'http://127.0.0.1:5173',
+#'https://react-school-system.onrender.com',
+)
 
 
 # Application definition
@@ -40,9 +61,11 @@ INSTALLED_APPS = [
     # Help us make API calls with REST and authenticate users with rest tokens
     "rest_framework",
     "rest_framework.authtoken",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -57,7 +80,9 @@ ROOT_URLCONF = "server.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, 'frontend', 'dist'),  # Adjust the path to your React app build directory
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

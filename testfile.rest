@@ -5,8 +5,8 @@ POST http://127.0.0.1:8000/login
 content-type: application/json
 
 {
-    "username": "profic",
-    "password": "Pass1234"
+    "username": "kite",
+    "password": "kite"
 }
 
 ### Signup POST method for new user request
