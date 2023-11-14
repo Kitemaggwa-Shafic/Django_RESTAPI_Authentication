@@ -5,8 +5,8 @@ POST http://127.0.0.1:8000/login
 content-type: application/json
 
 {
-    "username": "profic1",
-    "password": "Pass1234",
+    "username": "profic",
+    "password": "Pass1234"
 }
 
 ### Signup POST method for new user request
@@ -24,9 +24,5 @@ content-type: application/json
 ### test_token request 
 GET http://127.0.0.1:8000/test_token
 content-type: application/json
+Authorization: Token d95bcc8c50fe34c8895c84eedaac26695bb0b2b0
 
-{
-    "username": "profic",
-    "password": "Pass1234",
-    "email": "profic@gmail.com"
-}
