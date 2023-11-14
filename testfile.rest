@@ -1,0 +1,32 @@
+# This will be for test rest ApI
+
+POST http://127.0.0.1:8000/login
+content-type: application/json
+
+{
+    "username": "profic",
+    "password": "Pass1234",
+    "email": "profic@gmail.com"
+}
+
+### Signup request
+
+POST http://127.0.0.1:8000/signup
+content-type: application/json
+
+{
+    "username": "profic",
+    "password": "Pass1234",
+    "email": "profic@gmail.com"
+}
+
+
+### test_token request 
+GET http://127.0.0.1:8000/test_token
+content-type: application/json
+
+{
+    "username": "profic",
+    "password": "Pass1234",
+    "email": "profic@gmail.com"
+}
