@@ -5,7 +5,7 @@ POST http://127.0.0.1:8000/login
 content-type: application/json
 
 {
-    "username": "kite",
+    "email": "kite",
     "password": "kite"
 }
 
@@ -26,3 +26,14 @@ GET http://127.0.0.1:8000/test_token
 content-type: application/json
 Authorization: Token d95bcc8c50fe34c8895c84eedaac26695bb0b2b0
 
+
+###
+
+
+POST http://127.0.0.1:8000/logout
+content-type: application/json
+
+{
+    "username": "kite",
+    "password": "kite"
+}

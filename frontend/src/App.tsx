@@ -30,7 +30,7 @@ function App() {
   const [password, setPassword] = useState('');
 
 useEffect(() =>{
-  client.get("/test_token")
+  client.get("/")
   .then(function(res) {
     setCurrentUser(true);
   })
@@ -70,7 +70,7 @@ function submitLogin(e: React.FormEvent<HTMLFormElement>) {
     "login",
     {
       username:username,
-      password:password,
+      password:password, 
     }
   ).then(function(res) {
     setCurrentUser(true);
@@ -106,6 +106,9 @@ if (currentUser) {
           </Container>
         </Navbar>
         <h2>Welcome {username}</h2>
+        <h3>Your password is {password}</h3>
+        <h3>Your email is {email}</h3>
+        {/* <h3>Your token is {token}</h3> */}
     </>
   );
 }

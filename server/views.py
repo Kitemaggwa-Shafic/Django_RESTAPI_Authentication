@@ -1,4 +1,4 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, APIView
 from rest_framework.response import Response
 
 # imports for the serializer
@@ -16,7 +16,14 @@ def login(request):
         return Response({"detail": "user not found in db"}, status=status.HTTP_400_BAD_REQUEST)
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
-    return Response({"token": token.key, "user": serializer.data})
+    return Response({
+        "token": token.key, 
+        "user": {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+        }
+        }, status=status.HTTP_200_OK)
 
 
 # Sign up function with user token
@@ -38,6 +45,7 @@ def signup(request):
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import logout as auth_logout
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
@@ -48,9 +56,15 @@ def test_token(request):
     return Response("User token not authenticated {}".format(request.user.email))
 
 
+@api_view(['POST'])
+def user_logout(request):
+    if request.method == 'POST':
+        auth_logout(request)
+        return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'error': 'Method not allowed'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-
-
+ 
 # 
 @api_view(['GET'])
 def get_users(request):
