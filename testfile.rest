@@ -7,7 +7,6 @@ content-type: application/json
 {
     "username": "profic1",
     "password": "Pass1234",
-    "email": "profic@gmail.com"
 }
 
 ### Signup POST method for new user request
